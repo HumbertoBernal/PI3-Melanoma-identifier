@@ -14,6 +14,7 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import DatosMedicos from "./DatosMedicos";
+import Preview from "./Preview"
 
 function Copyright() {
     return (
@@ -128,12 +129,22 @@ const Checkout = () => {
                             )}
                         </React.Fragment>
                     </Paper>
-                    <Paper className={classes.paper} style={{"width": "35%", "height": "50%"}}>
-                        <Typography component="h6" variant="h6" align="center">
-                            Datos médicos
-                        </Typography>
-                        <DatosMedicos/>
-                    </Paper>
+                    <div style={{"display": "block"}}>
+                        <Paper className={classes.paper} style={{"width": "100%", "height": "50%"}}>
+                            <Typography component="h6" variant="h6" align="center">
+                                Datos médicos
+                            </Typography>
+                            <DatosMedicos/>
+                        </Paper>
+                        <Paper className={classes.paper} style={{"width": "100%"}}>
+                            <Preview  />
+                            <div  style={{"display": "flex", "justify-content":"space-around", "margin-top": "10px"}} >
+                                <Button variant="contained">Segmentar</Button>
+                                <Button variant="contained">Clasificar</Button>
+                            </div>
+                        </ Paper>
+                    
+                    </div>
                 </div>
                 <Copyright />
             </main>
