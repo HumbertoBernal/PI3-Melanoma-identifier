@@ -15,6 +15,7 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import DatosMedicos from "./DatosMedicos";
 import Preview from "./Preview"
+import Grid from '@material-ui/core/Grid';
 
 function Copyright() {
     return (
@@ -106,46 +107,47 @@ const Checkout = () => {
                 </Toolbar>
             </AppBar>
             <main className={classes.layout}>
-                <div style={{"display": "flex"}}>
-                    <Paper className={classes.paper} style={{"width": "65%"}}>
-                        <Typography component="h6" variant="h6" align="center">
-                            Información personal
-                        </Typography>
-                        <React.Fragment>
-                            {activeStep === steps.length ? (
-                                <React.Fragment>
-                                    <Typography variant="h5" gutterBottom>
-                                        Thank you for your order.
-                                    </Typography>
-                                    <Typography variant="subtitle1">
-                                        Your order number is #2001539. We have emailed your order confirmation, and will
-                                        send you an update when your order has shipped.
-                                    </Typography>
-                                </React.Fragment>
-                            ) : (
-                                <React.Fragment>
-                                    {getStepContent(activeStep)}
-                                </React.Fragment>
-                            )}
-                        </React.Fragment>
-                    </Paper>
-                    <div style={{"display": "block"}}>
-                        <Paper className={classes.paper} style={{"width": "100%", "height": "50%"}}>
+                <Grid container spacing={1}>
+                    <Grid item xs={12} sm={7}>
+                        <Paper className={classes.paper}>
+                            <Typography component="h6" variant="h6" align="center">
+                                Información personal
+                            </Typography>
+                            <React.Fragment>
+                                {activeStep === steps.length ? (
+                                    <React.Fragment>
+                                        <Typography variant="h5" gutterBottom>
+                                            Thank you for your order.
+                                        </Typography>
+                                        <Typography variant="subtitle1">
+                                            Your order number is #2001539. We have emailed your order confirmation, and will
+                                            send you an update when your order has shipped.
+                                        </Typography>
+                                    </React.Fragment>
+                                ) : (
+                                    <React.Fragment>
+                                        {getStepContent(activeStep)}
+                                    </React.Fragment>
+                                )}
+                            </React.Fragment>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={5}>
+                    <   Paper className={classes.paper} >
                             <Typography component="h6" variant="h6" align="center">
                                 Datos médicos
                             </Typography>
                             <DatosMedicos/>
                         </Paper>
-                        <Paper className={classes.paper} style={{"width": "100%"}}>
+                        <Paper className={classes.paper} >
                             <Preview  />
                             <div  style={{"display": "flex", "justify-content":"space-around", "margin-top": "10px"}} >
-                                <Button variant="contained">Segmentar</Button>
-                                <Button variant="contained">Clasificar</Button>
+                                <Button size="small" variant="contained">Segmentar</Button>
+                                <Button size="small" variant="contained">Clasificar</Button>
                             </div>
                         </ Paper>
-                    
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
                 <Copyright />
             </main>
         </React.Fragment>
