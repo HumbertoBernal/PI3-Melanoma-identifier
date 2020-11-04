@@ -3,10 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {CSSReset} from "@chakra-ui/core";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Segmentation from "./Segmentation";
+import Checkout from "./Checkout";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <App>
+          <Router>
+              <div className="App">
+                  <Switch>
+                      <Route path={"/segmentacion"}>
+                          <Segmentation/>
+                      </Route>
+                      <Route path={"/"}>
+                          <Checkout />
+                      </Route>
+                  </Switch>
+              </div>
+          </Router>
+      </App>
   </React.StrictMode>,
   document.getElementById('root')
 );

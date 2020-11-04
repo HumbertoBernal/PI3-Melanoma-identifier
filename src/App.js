@@ -1,12 +1,21 @@
 import React from 'react';
 import './App.css';
 import Checkout from "./Checkout";
+import Segmentation from "./Segmentation";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import {CSSReset, ThemeProvider} from "@chakra-ui/core";
 
-function App() {
+function App({children}) {
   return (
-    <div className="App">
-      <Checkout />
-    </div>
+      <ThemeProvider>
+      <CSSReset/>
+          {children}
+      </ThemeProvider>
   );
 }
 
