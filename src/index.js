@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -6,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import {CSSReset} from "@chakra-ui/core";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Segmentation from "./Segmentation";
+import Clasification from "./Clasification";
 import Checkout from "./Checkout";
 
 ReactDOM.render(
@@ -16,6 +18,9 @@ ReactDOM.render(
                   <Switch>
                       <Route path={"/segmentacion"}>
                           <Segmentation/>
+                      </Route>
+                      <Route path={"/clasificacion"}>
+                          <Clasification/>
                       </Route>
                       <Route path={"/"}>
                           <Checkout />
@@ -32,3 +37,12 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+*/
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+const container = document.getElementById('root');
+
+ReactDOM.render(<App />, container);

@@ -30,6 +30,15 @@ export default function DatosMedicos() {
                         fullWidth
                     />
                 </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        required
+                        id="raza"
+                        name="raza"
+                        label="Raza"
+                        fullWidth
+                    />
+                </Grid>
             </Grid>
     );
 }

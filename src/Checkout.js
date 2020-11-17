@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,12 +16,17 @@ import Review from './Review';
 import DatosMedicos from "./DatosMedicos";
 import Preview from "./Preview"
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+
+import { useHistory } from 'react-router-dom';
+import { UserContext } from './context/userContext';
+import { logoutUser } from './service/magic';
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            <Link color="inherit" href="">
                 G3
             </Link>{' '}
             {new Date().getFullYear()}
@@ -85,6 +90,18 @@ function getStepContent(step) {
 }
 
 const Checkout = () => {
+    const { email } = useContext(UserContext);
+    const history = useHistory();
+
+    const handleLogOut = async () => {
+        try {
+            await logoutUser();
+            history.replace('/');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
 
@@ -99,10 +116,24 @@ const Checkout = () => {
     return (
         <React.Fragment>
             <CssBaseline />
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                    News
+                    </Typography>
+                 
+                </Toolbar>
+                </AppBar>
             <AppBar position="absolute" color="default" className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" color="inherit" noWrap>
                         Melanoma Detector
+                    </Typography>
+                    <Typography variant="h6" color="inherit" >
+                        {email}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -142,8 +173,16 @@ const Checkout = () => {
                         <Paper className={classes.paper} >
                             <Preview  />
                             <div  style={{"display": "flex", "justify-content":"space-around", "margin-top": "10px"}} >
-                                <Button size="small" variant="contained">Segmentar</Button>
-                                <Button size="small" variant="contained">Clasificar</Button>
+                               <Link href="/segmentacion">
+                                   <Button size="small" variant="contained">
+                                    Segmentar
+                                   </Button>
+                               </Link>
+                                <Link  href="/clasificacion">
+                                   <Button size="small" variant="contained">
+                                    Clasificar
+                                   </Button>
+                               </Link>
                             </div>
                         </ Paper>
                     </Grid>
