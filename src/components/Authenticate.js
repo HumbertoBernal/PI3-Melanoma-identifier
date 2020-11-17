@@ -28,7 +28,7 @@ const Authenticate = () => {
     try {
       await loginUser(email);
       setLoading(false);
-      history.replace('/dashboard');
+      history.replace('/checkout');
     } catch (error) {
       setError('Unable to log in');
       console.error(error);

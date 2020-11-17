@@ -13,7 +13,7 @@ import {CSSReset, ThemeProvider} from "@chakra-ui/core";
 function App({children}) {
   return (
       <ThemeProvider>
-      <CSSReset/>
+          <CSSReset/>
           {children}
       </ThemeProvider>
   );
@@ -30,12 +30,12 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
-import { UserContext } from './context/userContext';
-import { checkUser } from './service/magic';
-import Authenticate from './components/Authenticate';
-import Dashboard from './components/DashBoard';
-import PrivateRoute from './components/PrivateRoute';
-import Checkout from './Checkout'
+import { UserContext } from '../context/userContext';
+import { checkUser } from '../service/magic';
+import Authenticate from './Authenticate';
+import Dashboard from './DashBoard';
+import PrivateRoute from './PrivateRoute';
+import Checkout from '../pages/Checkout'
 
 const App = () => {
 
