@@ -50,6 +50,7 @@ export default function Preview(props) {
         <img
           src={file.preview}
           style={img}
+          alt="img"
         />
       </div>
     </div>

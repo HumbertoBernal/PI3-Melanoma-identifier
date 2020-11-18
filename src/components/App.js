@@ -1,27 +1,3 @@
-/*import React from 'react';
-import './App.css';
-import Checkout from "./Checkout";
-import Segmentation from "./Segmentation";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
-import {CSSReset, ThemeProvider} from "@chakra-ui/core";
-
-function App({children}) {
-  return (
-      <ThemeProvider>
-          <CSSReset/>
-          {children}
-      </ThemeProvider>
-  );
-}
-
-export default App;
-*/
-
 import React, { useState, useEffect } from 'react';
 import {
   Switch,
@@ -29,13 +5,18 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+
 import Spinner from 'react-bootstrap/Spinner';
 import { UserContext } from '../context/userContext';
 import { checkUser } from '../service/magic';
+
 import Authenticate from './Authenticate';
 import Dashboard from './DashBoard';
 import PrivateRoute from './PrivateRoute';
+import Layout from './Layout';
+
 import Checkout from '../pages/Checkout'
+import NotFound from '../pages/NotFound';
 
 const App = () => {
 
@@ -54,6 +35,13 @@ const App = () => {
     };
     validateUser();
   }, [user.isLoggedIn]);
+
+  const salio = () => {
+    setUser(
+      {isLoggedIn: null,  email: ''}
+    );
+  }
+
   if (loading) {
     return (
       <div
@@ -68,13 +56,15 @@ const App = () => {
   return (
     <UserContext.Provider value={user}>
       <Router>
-        {user.isLoggedIn && <Redirect to={{ pathname: '/checkout' }} />}
+      {user.isLoggedIn && <Redirect to='/checkout' />}
+        <Layout salio={salio} user={user}>
         <Switch>
           <Route exact path="/" component={Authenticate} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/checkout" component={Checkout} />
-
+          <Route component={NotFound} />
         </Switch>
+        </Layout>
       </Router>
     </UserContext.Provider>
   );

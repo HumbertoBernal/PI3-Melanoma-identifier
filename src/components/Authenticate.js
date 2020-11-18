@@ -4,12 +4,14 @@ import {
   Button,
   Form,
   FormGroup,
-  FormLabel,
   FormControl,
 } from 'react-bootstrap';
 import { loginUser } from '../service/magic';
 
+import './styles/Signup.css';
+
 const Authenticate = () => {
+  
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState('');
   const [error, setError] = useState(null);
@@ -24,11 +26,11 @@ const Authenticate = () => {
       setError('Email is Invalid');
       return;
     }
-    
+
     try {
       await loginUser(email);
       setLoading(false);
-      history.replace('/checkout');
+      setTimeout(() => {  history.replace('/checkout'); }, 2000);
     } catch (error) {
       setError('Unable to log in');
       console.error(error);
@@ -40,30 +42,47 @@ const Authenticate = () => {
   };
 
   return (
-    <div className="w-50 p-5 mt-5 mx-auto">
-      <h1 className="h1 text-center">React Magic Form</h1>
-      <Form onSubmit={handleSubmit} className="p-2 my-5 mx-auto">
-        <FormGroup className="mt-3" controlId="formBasicEmail">
-          <FormLabel fontSize="sm">Enter Email Address</FormLabel>
-          <FormControl
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={handleChange}
-            placeholder="Email Address"
-          />
-          <p className="text-danger text-small">{error}</p>
-        </FormGroup>
-        <Button
-          type="submit"
-          size="md"
-          className="d-block w-100"
-          variant="primary"
-        >
-          {loading ? 'Loading...' : 'Send'}
-        </Button>
+    <div className="body">
+      <h2 className="my-5" >Bienvenido a Melanoma Detector</h2>
+      <div className="container p-0" id="container">
+        <div className="formcontainer sign-in-container">
+          <div className="form text-center">
+          <h1>Iniciar sesión</h1>
+
+            <Form onSubmit={handleSubmit} className="p-2 my-5 mx-5">
+
+            <FormGroup className="mt-3" >
+              <FormControl 
+               autoComplete="off"
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                onChange={handleChange}
+                placeholder="Correo electrónico"
+              />
+              <p className="text-danger text-small">{error}</p>
+            </FormGroup>
+            <Button
+              type="submit"
+              size="md"
+              className="d-block w-100"
+              variant="primary"
+            >
+              {loading ? 'Loading...' : 'Ingresar'}
+            </Button>
       </Form>
+          </div>
+        </div>
+        <div className="overlay-container">
+          <div className="overlay">
+            <div className="overlay-panel overlay-right">
+              <h1>Hola!</h1>
+              <p>Ingresa para averiguar si posiblemente tienes melanoma</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
