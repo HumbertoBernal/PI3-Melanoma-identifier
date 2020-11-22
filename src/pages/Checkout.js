@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext, useEffect} from 'react';
 import { UserContext } from '../context/userContext';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,6 +13,7 @@ import AddressForm from "../components/AddressForm";
 import DatosMedicos from "../components/DatosMedicos";
 import Preview from "../components/Preview";
 import Copyright from "../components/Copyright";
+import {checkUser, getToken} from "../service/magic";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -55,8 +56,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Checkout = () => {
     const { email } = useContext(UserContext);
-    
+
     const classes = useStyles();
+
+    useEffect(() => {
+        const printToken = async () => {
+            const token = await getToken();
+            console.log("token", token)
+        }
+        printToken();
+    }, []);
 
     return (
         <React.Fragment>
