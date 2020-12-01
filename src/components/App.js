@@ -58,7 +58,7 @@ const App = () => {
   return (
     <UserContext.Provider value={user}>
       <Router>
-      {user.hasData ? <Redirect to={'/segmentacion'}/> : <Redirect to='/checkout' />}
+      {user.hasData ? <Redirect to={'/segmentacion'}/> : user.isLoggedIn && <Redirect to='/checkout' />}
         <Layout salio={salio} user={user}>
         <Switch>
           <Route exact path="/" component={Authenticate} />
