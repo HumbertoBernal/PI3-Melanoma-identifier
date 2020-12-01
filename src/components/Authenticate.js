@@ -30,7 +30,7 @@ const Authenticate = () => {
     try {
       await loginUser(email);
       setLoading(false);
-      setTimeout(() => {  history.replace('/checkout'); }, 2000);
+      history.replace('/checkout');
     } catch (error) {
       setError('Unable to log in');
       console.error(error);
