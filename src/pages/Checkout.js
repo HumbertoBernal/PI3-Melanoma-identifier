@@ -14,6 +14,7 @@ import DatosMedicos from "../components/DatosMedicos";
 import Preview from "../components/Preview";
 import Copyright from "../components/Copyright";
 import {checkUser, getToken} from "../service/magic";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -55,17 +56,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Checkout = () => {
-    const { email } = useContext(UserContext);
+    const {email} = useContext(UserContext);
     const [files, setFiles] = useState([]);
     const [segmentBool, setSegment] = useState(false);
     const [doSubmit, setSubmit] = useState(false);
-
     const classes = useStyles();
+
 
     useEffect(() => {
         async function submitPhoto() {
             if(doSubmit) {
-                console.log("files", files)
+                const response = await axios.post(`http://localhost:5000/upload`);
+                console.log("upload response", response)
             }
         }
         submitPhoto()
