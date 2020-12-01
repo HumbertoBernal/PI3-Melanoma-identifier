@@ -22,7 +22,7 @@ import Clasification from "../pages/Clasification";
 
 const App = () => {
 
-  const [user, setUser] = useState({ isLoggedIn: null, email: '' });
+  const [user, setUser] = useState({ isLoggedIn: null, email: '' , hasData: null});
   const [loading, setLoading] = useState();
 
   useEffect(() => {

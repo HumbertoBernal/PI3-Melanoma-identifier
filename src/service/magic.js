@@ -7,7 +7,7 @@ export const checkUser = async (cb) => {
   const isLoggedIn = await magic.user.isLoggedIn();
   if (isLoggedIn) {
     const user = await magic.user.getMetadata();
-    const token = getToken();
+    const token = await getToken();
     const response = await axios({
       method: 'post',
       headers: {'Authorization': token},
