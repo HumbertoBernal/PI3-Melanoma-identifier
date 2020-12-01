@@ -19,17 +19,19 @@ const Segmentation = () => {
     const [data, setData] = useState({})
 
     useEffect(() => {
-        const getData = async () => {
-            const token = await getData();
-            const response = axios({
-                method: 'get',
-                url: 'http://localhost:5000/getData',
-                headers: {'Authorization': token}
-            })
-            return response.data
-        }
-
-        setData(getData())
+        useEffect(() => {
+            const getData = async () => {
+                const token = await getData();
+                const response = await axios({
+                    method: 'post',
+                    url: 'http://localhost:5000/getData',
+                    data: {'email': email},
+                    headers: {'Authorization': token}
+                })
+                setData(response.data)
+            }
+            getData()
+        }, [])
     }, [])
 
     const nombre = `${data.firstName} ${data.lastName}`
