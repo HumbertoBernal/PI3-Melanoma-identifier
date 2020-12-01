@@ -20,7 +20,7 @@ export default function DatosMedicos({email, submitForm, type}) {
             };
             console.log("datosmedicos data", data)
             const token = getToken()
-            const response = axios({
+            const response = await axios({
                 method: 'post',
                 url: 'http://localhost:5000/datosmedicos',
                 data: data,
