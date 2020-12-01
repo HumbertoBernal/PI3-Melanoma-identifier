@@ -117,16 +117,12 @@ const Checkout = () => {
                         <Paper className={classes.paper} >
                             <Preview  files={files} setFiles={setFiles}/>
                             <div  style={{"display": "flex", "justifyContent":"space-around", "marginTop": "10px"}} >
-                               <Link href="/segmentacion">
                                    <Button size="small" variant="contained" onClick={segment}>
                                        Segmentar
                                    </Button>
-                               </Link>
-                                <Link  href="/clasificacion">
                                    <Button size="small" variant="contained" onClick={classify}>
                                         Clasificar
                                    </Button>
-                               </Link>
                             </div>
                         </ Paper>
                     </Grid>
