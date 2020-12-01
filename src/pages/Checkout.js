@@ -66,7 +66,18 @@ const Checkout = () => {
     useEffect(() => {
         async function submitPhoto() {
             if(doSubmit) {
-                const response = await axios.post(`http://localhost:5000/upload`);
+                let formData = new FormData();
+                formData.append('img_file', files[0]);
+                formData.append('email', email);
+                const token = await getToken()
+                const response = await axios({
+                    method: 'post',
+                    url: `http://localhost:5000/upload`,
+                    data: formData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': token}
+                });
                 console.log("upload response", response)
             }
         }
