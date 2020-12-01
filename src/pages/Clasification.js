@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
 import Image from "@chakra-ui/core/dist/Image";
 import axios from "axios";
 import {UserContext} from "../context/userContext";
+import {checkUser, getToken} from "../service/magic";
 
 const Main = styled.main`
     margin-top: 100px;
@@ -16,14 +17,13 @@ const Main = styled.main`
 const probabilidad= 74.8;
 
 
-const Segmentation = () => {
+const Clasification = () => {
     const {email} = useContext(UserContext)
     const [data, setData] = useState({})
 
-    useEffect(() => {
         useEffect(() => {
             const getData = async () => {
-                const token = await getData();
+                const token = await getToken();
                 const response = await axios({
                     method: 'post',
                     url: 'http://localhost:5000/getData',
@@ -34,8 +34,6 @@ const Segmentation = () => {
             }
             getData()
         }, [])
-    }, [])
-
     const nombre = `${data.firstName} ${data.lastName}`
     return (
         <>
@@ -88,4 +86,4 @@ const Segmentation = () => {
     );
 };
 
-export default Segmentation;
+export default Clasification;

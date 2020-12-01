@@ -9,7 +9,8 @@ import nombre from "../pages/Clasification";
 import Heading from "@chakra-ui/core/dist/Heading";
 import Fields from "./Fields";
 
-const BasicInfo = ({data}) => {
+const BasicInfo = (data) => {
+    console.log("data: ", data)
     const x = [{
         "Sexo": data.sex,
         "Fecha de nacimiento": data.date,

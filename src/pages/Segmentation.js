@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
 import Image from "@chakra-ui/core/dist/Image";
 import axios from 'axios';
 import {UserContext} from "../context/userContext";
+import {checkUser, getToken} from "../service/magic";
 
 const Main = styled.main`
     margin-top: 100px;
@@ -19,7 +20,7 @@ const Segmentation = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const token = await getData();
+            const token = await getToken();
             const response = await axios({
                 method: 'post',
                 url: 'http://localhost:5000/getData',
@@ -54,7 +55,7 @@ const Segmentation = () => {
                             >
                                 Imagen original
                             </Box>
-                            <Image src={"original.png"} w={"300px"} h={"300px"}/>
+                            <Image src={data.url} w={"300px"} h={"300px"}/>
                         </Box>
                         <Box p={"5"} pt={"4"} m={"2"} ml={"20"} overflow={"hidden"} rounded={"lg"} borderWidth={"1px"}>
                             <Box
