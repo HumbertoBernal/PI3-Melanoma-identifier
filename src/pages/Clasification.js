@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Flex, Box } from '@chakra-ui/core';
 import BasicInfo from "../components/BasicInfo";
 import AppBar from "@material-ui/core/AppBar";
@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import styled from '@emotion/styled';
 import Image from "@chakra-ui/core/dist/Image";
 import axios from "axios";
+import {UserContext} from "../context/userContext";
 
 const Main = styled.main`
     margin-top: 100px;
@@ -16,6 +17,7 @@ const probabilidad= 74.8;
 
 
 const Segmentation = () => {
+    const {email} = useContext(UserContext)
     const [data, setData] = useState({})
 
     useEffect(() => {
