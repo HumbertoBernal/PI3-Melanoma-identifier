@@ -19,6 +19,8 @@ import Checkout from '../pages/Checkout'
 import NotFound from '../pages/NotFound';
 import Segmentation from "../pages/Segmentation";
 import Clasification from "../pages/Clasification";
+import ThemeProvider from "@chakra-ui/core/dist/ThemeProvider";
+import {CSSReset} from "@chakra-ui/core";
 
 const App = () => {
 
@@ -56,6 +58,8 @@ const App = () => {
   }
 
   return (
+      <ThemeProvider>
+        <CSSReset/>
     <UserContext.Provider value={user}>
       <Router>
       {user.hasData ? <Redirect to={'/segmentacion'}/> : user.isLoggedIn && <Redirect to='/checkout' />}
@@ -71,6 +75,7 @@ const App = () => {
         </Layout>
       </Router>
     </UserContext.Provider>
+        </ThemeProvider>
   );
 };
 export default App;
