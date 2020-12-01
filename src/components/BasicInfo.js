@@ -7,7 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import nombre from "../pages/Clasification";
 
 import Heading from "@chakra-ui/core/dist/Heading";
-import Fields from "../Fields";
+import Fields from "./Fields";
 
 const BasicInfo = () => {
     const x = [{

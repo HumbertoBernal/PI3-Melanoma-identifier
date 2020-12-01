@@ -9,7 +9,7 @@ export const checkUser = async (cb) => {
     const user = await magic.user.getMetadata();
     const token = getToken();
     const response = await axios({
-      method: 'get',
+      method: 'post',
       headers: {'Authorization': token},
       data: {'email': user.email},
       url: 'http://localhost:5000/v1/users/login'
