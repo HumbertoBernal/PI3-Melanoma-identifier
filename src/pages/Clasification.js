@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Flex, Box } from '@chakra-ui/core';
 import BasicInfo from "../components/BasicInfo";
 import AppBar from "@material-ui/core/AppBar";
@@ -6,16 +6,33 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import styled from '@emotion/styled';
 import Image from "@chakra-ui/core/dist/Image";
+import axios from "axios";
 
 const Main = styled.main`
     margin-top: 100px;
 `;
 
-let probabilidad= 74.8,
-    nombre = "Jesse Wynn";
+const probabilidad= 74.8;
 
 
 const Segmentation = () => {
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+        const getData = async () => {
+            const token = await getData();
+            const response = axios({
+                method: 'get',
+                url: 'http://localhost:5000/getData',
+                headers: {'Authorization': token}
+            })
+            return response.data
+        }
+
+        setData(getData())
+    }, [])
+
+    const nombre = `${data.firstName} ${data.lastName}`
     return (
         <>
             <AppBar position="relative" color="default">

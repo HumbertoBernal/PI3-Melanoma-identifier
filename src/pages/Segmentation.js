@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Flex, Box } from '@chakra-ui/core';
 import BasicInfo from "../components/BasicInfo";
 import AppBar from "@material-ui/core/AppBar";
@@ -6,13 +6,28 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import styled from '@emotion/styled';
 import Image from "@chakra-ui/core/dist/Image";
+import axios from 'axios';
 
 const Main = styled.main`
     margin-top: 100px;
 `;
 
-
 const Segmentation = () => {
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+        const getData = async () => {
+            const token = await getData();
+            const response = axios({
+                method: 'get',
+                url: 'http://localhost:5000/getData',
+                headers: {'Authorization': token}
+            })
+            return response.data
+        }
+
+        setData(getData())
+    }, [])
     return (
         <>
             <AppBar position="relative" color="default">
@@ -24,7 +39,7 @@ const Segmentation = () => {
             </AppBar>
             <Main>
                 <Flex align={"center"} direction={"column"}>
-                    <BasicInfo/>
+                    <BasicInfo {...data}/>
                     <Flex align={"center"}>
                         <Box p={"5"} pt={"4"} m={"2"} mr={"20"} overflow={"hidden"} rounded={"lg"} borderWidth={"1px"}>
                             <Box
@@ -50,7 +65,7 @@ const Segmentation = () => {
                             >
                                 Imagen segmentada
                             </Box>
-                            <Image src={"segmented.png"} w={"300px"} h={"300px"}/>
+                            <Image src={data.url} w={"300px"} h={"300px"}/>
                         </Box>
                     </Flex>
                 </Flex>
