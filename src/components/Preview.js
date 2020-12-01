@@ -33,8 +33,8 @@ const img = {
     };
 
 
-export default function Preview(props) {
-  const [files, setFiles] = useState([]);
+export default function Preview({files, setFiles}) {
+
   const {getRootProps, getInputProps} = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
@@ -55,11 +55,6 @@ export default function Preview(props) {
       </div>
     </div>
   ));
-
-  useEffect(() => () => {
-    // Make sure to revoke the data uris to avoid memory leaks
-    files.forEach(file => URL.revokeObjectURL(file.preview));
-  }, [files]);
 
   return (
     <section className="container" style={{"border": "2px dashed black" }}>

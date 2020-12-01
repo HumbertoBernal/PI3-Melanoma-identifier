@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { UserContext } from '../context/userContext';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -56,8 +56,20 @@ const useStyles = makeStyles((theme) => ({
 
 const Checkout = () => {
     const { email } = useContext(UserContext);
+    const [files, setFiles] = useState([]);
+    const [segmentBool, setSegment] = useState(false);
+    const [doSubmit, setSubmit] = useState(false);
 
     const classes = useStyles();
+
+    useEffect(() => {
+        async function submitPhoto() {
+            if(doSubmit) {
+                console.log("files", files)
+            }
+        }
+        submitPhoto()
+    }, [doSubmit])
 
     useEffect(() => {
         const printToken = async () => {
@@ -66,6 +78,21 @@ const Checkout = () => {
         }
         printToken();
     }, []);
+
+    useEffect(() => () => {
+        // Make sure to revoke the data uris to avoid memory leaks
+        files.forEach(file => URL.revokeObjectURL(file.preview));
+    }, [files]);
+
+    const segment = () => {
+        setSegment(true);
+        setSubmit(true)
+    };
+
+    const classify = () => {
+        setSegment(false)
+        setSubmit(true)
+    };
 
     return (
         <React.Fragment>
@@ -77,27 +104,27 @@ const Checkout = () => {
                             <Typography component="h6" variant="h6" align="center">
                                 Información personal
                             </Typography>
-                            <AddressForm email={email} />
+                            <AddressForm email={email} submitForm={doSubmit} type={segmentBool}/>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={5}>
-                    <   Paper className={classes.paper} >
+                    <Paper className={classes.paper} >
                             <Typography component="h6" variant="h6" align="center">
                                 Datos médicos
                             </Typography>
-                            <DatosMedicos/>
+                            <DatosMedicos submitForm={doSubmit} type={segmentBool}/>
                         </Paper>
                         <Paper className={classes.paper} >
-                            <Preview  />
+                            <Preview  files={files} setFiles={setFiles}/>
                             <div  style={{"display": "flex", "justifyContent":"space-around", "marginTop": "10px"}} >
                                <Link href="/segmentacion">
-                                   <Button size="small" variant="contained">
-                                    Segmentar
+                                   <Button size="small" variant="contained" onClick={segment}>
+                                       Segmentar
                                    </Button>
                                </Link>
                                 <Link  href="/clasificacion">
-                                   <Button size="small" variant="contained">
-                                    Clasificar
+                                   <Button size="small" variant="contained" onClick={classify}>
+                                        Clasificar
                                    </Button>
                                </Link>
                             </div>

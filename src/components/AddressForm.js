@@ -1,15 +1,40 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel'
 import FormControl from "@material-ui/core/FormControl";
 
-export default function AddressForm(props) {
+// type: true === segment
+export default function AddressForm({email, submitForm, type}) {
+    const firstName = useRef(null);
+    const lastName = useRef(null);
+    const date = useRef(null);
+    const district = useRef(null);
+    const number = useRef(null);
+
+
+    useEffect(() => {
+        async function handleSubmit() {
+            const data = {
+                "firstName": firstName.current.value,
+                "lastName": lastName.current.value,
+                "date": date.current.value,
+                "number": number.current.value,
+                "district": district.current.value,
+                "type": type
+            };
+            console.log("address data", data)
+            // hacer post
+        }
+        handleSubmit();
+    }, [submitForm])
+
     return (
-        <React.Fragment>
+        <form>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <TextField
+                        inputRef={firstName}
                         required
                         id="firstName"
                         name="firstName"
@@ -19,6 +44,7 @@ export default function AddressForm(props) {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
+                        inputRef={lastName}
                         required
                         id="lastName"
                         name="lastName"
@@ -32,7 +58,7 @@ export default function AddressForm(props) {
                         name="email"
                         label="Correo electrónico"
                         fullWidth
-                        value={props.email}
+                        value={email}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -46,6 +72,7 @@ export default function AddressForm(props) {
                             Fecha de nacimiento
                         </FormLabel>
                         <TextField
+                            inputRef={date}
                             type={"date"}
                             id="birthday"
                             name="birthday"
@@ -56,6 +83,7 @@ export default function AddressForm(props) {
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required
+                        inputRef={district}
                         id="district"
                         name="district"
                         label="Distrito"
@@ -68,6 +96,7 @@ export default function AddressForm(props) {
                 <Grid item xs={12}>
                     <TextField
                         required
+                        inputRef={number}
                         type={"number"}
                         id="phone"
                         name="phone"
@@ -76,6 +105,6 @@ export default function AddressForm(props) {
                     />
                 </Grid>
             </Grid>
-        </React.Fragment>
+        </form>
     );
 }

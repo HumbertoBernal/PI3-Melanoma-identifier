@@ -1,13 +1,32 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
 
-export default function DatosMedicos() {
+export default function DatosMedicos({submitForm, type}) {
+    const bloodType = useRef(null);
+    const sex = useRef(null);
+    const raza = useRef(null);
+
+    useEffect(() => {
+        async function handleSubmit() {
+            const data = {
+                "bloodType": bloodType.current.value,
+                "sex": sex.current.value,
+                "raza": raza.current.value,
+                "type": type
+            };
+            console.log("datosmedicos data", data)
+            // hacer post
+        }
+        handleSubmit();
+    }, [submitForm])
+
     return (
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <TextField
+                        inputRef={bloodType}
                         required
                         id="bloodType"
                         name="bloodType"
@@ -17,6 +36,7 @@ export default function DatosMedicos() {
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
+                        inputRef={sex}
                         required
                         id="sex"
                         name="sex"
@@ -26,6 +46,7 @@ export default function DatosMedicos() {
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
+                        inputRef={raza}
                         required
                         id="raza"
                         name="raza"
