@@ -17,6 +17,8 @@ import Layout from './Layout';
 
 import Checkout from '../pages/Checkout'
 import NotFound from '../pages/NotFound';
+import Segmentation from "../pages/Segmentation";
+import Clasification from "../pages/Clasification";
 
 const App = () => {
 
@@ -56,12 +58,14 @@ const App = () => {
   return (
     <UserContext.Provider value={user}>
       <Router>
-      {user.isLoggedIn && <Redirect to='/checkout' />}
+      {user.hasData ? <Redirect to={'/segmentacion'}/> : <Redirect to='/checkout' />}
         <Layout salio={salio} user={user}>
         <Switch>
           <Route exact path="/" component={Authenticate} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/checkout" component={Checkout} />
+          <PrivateRoute path="/segmentacion" component={Segmentation} />
+          <PrivateRoute path="/clasificacion" component={Clasification} />
           <Route component={NotFound} />
         </Switch>
         </Layout>
