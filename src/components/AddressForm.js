@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel'
 import FormControl from "@material-ui/core/FormControl";
+import axios from 'axios';
+import {getToken} from "../service/magic";
 
 // type: true === segment
 export default function AddressForm({email, submitForm, type}) {
@@ -12,7 +14,6 @@ export default function AddressForm({email, submitForm, type}) {
     const district = useRef(null);
     const number = useRef(null);
 
-
     useEffect(() => {
         async function handleSubmit() {
             const data = {
@@ -21,10 +22,18 @@ export default function AddressForm({email, submitForm, type}) {
                 "date": date.current.value,
                 "number": number.current.value,
                 "district": district.current.value,
-                "type": type
+                "type": type,
+                "email": email
             };
             console.log("address data", data)
-            // hacer post
+            const token = await getToken();
+            const response = axios({
+                method: 'post',
+                url: 'http://localhost:5000/address',
+                data: data,
+                headers: {'Authorization': token}
+            })
+            console.log("response", response)
         }
         handleSubmit();
     }, [submitForm])

@@ -1,9 +1,10 @@
 import React, {useEffect, useRef} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import {getToken} from "../service/magic";
+import axios from 'axios'
 
-
-export default function DatosMedicos({submitForm, type}) {
+export default function DatosMedicos({email, submitForm, type}) {
     const bloodType = useRef(null);
     const sex = useRef(null);
     const raza = useRef(null);
@@ -14,10 +15,18 @@ export default function DatosMedicos({submitForm, type}) {
                 "bloodType": bloodType.current.value,
                 "sex": sex.current.value,
                 "raza": raza.current.value,
+                "email": email,
                 "type": type
             };
             console.log("datosmedicos data", data)
-            // hacer post
+            const token = getToken()
+            const response = axios({
+                method: 'post',
+                url: 'http://localhost:5000/datosmedicos',
+                data: data,
+                headers: {'Authorization': token}
+            })
+            console.log('response', response)
         }
         handleSubmit();
     }, [submitForm])

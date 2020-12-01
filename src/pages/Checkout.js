@@ -125,7 +125,7 @@ const Checkout = () => {
                             <Typography component="h6" variant="h6" align="center">
                                 Datos médicos
                             </Typography>
-                            <DatosMedicos submitForm={doSubmit} type={segmentBool}/>
+                            <DatosMedicos email={email} submitForm={doSubmit} type={segmentBool}/>
                         </Paper>
                         <Paper className={classes.paper} >
                             <Preview  files={files} setFiles={setFiles}/>
