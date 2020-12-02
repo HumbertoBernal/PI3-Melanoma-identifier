@@ -1,14 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { Flex, Box } from '@chakra-ui/core';
-import BasicInfo from "../components/BasicInfo";
+import { Flex } from '@chakra-ui/core';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import styled from '@emotion/styled';
-import Image from "@chakra-ui/core/dist/Image";
+
+import BasicInfo from "../components/BasicInfo";
+import ImageBox from "../components/ImageBox";
 import axios from 'axios';
 import {UserContext} from "../context/userContext";
-import {checkUser, getToken} from "../service/magic";
+import {getToken} from "../service/magic";
 
 const Main = styled.main`
     margin-top: 100px;
@@ -30,7 +31,8 @@ const Segmentation = () => {
             setData(response.data)
         }
         getData()
-    }, [])
+    }, [email])
+
     return (
         <>
             <AppBar position="relative" color="default">
@@ -44,32 +46,8 @@ const Segmentation = () => {
                 <Flex align={"center"} direction={"column"}>
                     <BasicInfo {...data}/>
                     <Flex align={"center"}>
-                        <Box p={"5"} pt={"4"} m={"2"} mr={"20"} overflow={"hidden"} rounded={"lg"} borderWidth={"1px"}>
-                            <Box
-                                p={"1"}
-                                fontWeight="semibold"
-                                lineHeight="tight"
-                                bg={"tomato"}
-                                rounded={"md"}
-                                mb={"1"}
-                            >
-                                Imagen original
-                            </Box>
-                            <Image src={data.url} w={"300px"} h={"300px"}/>
-                        </Box>
-                        <Box p={"5"} pt={"4"} m={"2"} ml={"20"} overflow={"hidden"} rounded={"lg"} borderWidth={"1px"}>
-                            <Box
-                                p={"1"}
-                                fontWeight="semibold"
-                                lineHeight="tight"
-                                bg={"tomato"}
-                                rounded={"md"}
-                                mb={"1"}
-                            >
-                                Imagen segmentada
-                            </Box>
-                            <Image src={data.url} w={"300px"} h={"300px"}/>
-                        </Box>
+                        <ImageBox titulo= "Imagen original" url={data.url} />
+                        <ImageBox titulo= "Imagen segmentada" url={data.url} />
                     </Flex>
                 </Flex>
             </Main>
