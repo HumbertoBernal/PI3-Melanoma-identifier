@@ -5,7 +5,7 @@ import Image from "@chakra-ui/core/dist/Image";
 const ImageBox = (props) => 
 <React.Fragment>
     <Box p={"5"} pt={"4"} m={"2"} mr={"20"} overflow={"hidden"} rounded={"lg"} borderWidth={"1px"}>
-        <Box
+        <Box className="text-center"
             p={"1"}
             fontWeight="semibold"
             lineHeight="tight"

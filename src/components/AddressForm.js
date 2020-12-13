@@ -67,7 +67,6 @@ export default function AddressForm({email, submitForm, type}) {
                         name="email"
                         label="Correo electrónico"
                         fullWidth
-                        value={email}
                     />
                 </Grid>
                 <Grid item xs={12}>

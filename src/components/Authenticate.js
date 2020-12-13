@@ -15,6 +15,7 @@ const Authenticate = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState('');
   const [error, setError] = useState(null);
+
   const history = useHistory();
 
   const handleSubmit = async (event) => {

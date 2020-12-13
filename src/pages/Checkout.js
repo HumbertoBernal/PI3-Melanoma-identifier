@@ -1,10 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { UserContext } from '../context/userContext';
+import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +17,7 @@ import Preview from "../components/Preview";
 import Copyright from "../components/Copyright";
 import {checkUser, getToken} from "../service/magic";
 import axios from 'axios';
+
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -61,6 +64,7 @@ const Checkout = () => {
     const [segmentBool, setSegment] = useState(false);
     const [doSubmit, setSubmit] = useState(false);
     const classes = useStyles();
+    const history = useHistory();
 
 
     useEffect(() => {
@@ -100,11 +104,14 @@ const Checkout = () => {
     const segment = () => {
         setSegment(true);
         setSubmit(true)
+        history.replace('/segmentacion');
     };
 
     const classify = () => {
         setSegment(false)
         setSubmit(true)
+        history.replace('/clasificacion');
+
     };
 
     return (
