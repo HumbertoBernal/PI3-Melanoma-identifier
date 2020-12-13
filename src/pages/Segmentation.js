@@ -61,7 +61,7 @@ const Segmentation = () => {
                     <BasicInfo {...data}/>
                     <Flex align={"center"}>
                         <ImageBox titulo= "Imagen original" url={data.url} />
-                        <ImageBox titulo= "Imagen segmentada" url="" />
+                        <ImageBox titulo= "Imagen segmentada" url={data.url} />
                     </Flex>
                 </Flex>
             </Main>

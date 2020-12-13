@@ -101,17 +101,16 @@ const Checkout = () => {
         files.forEach(file => URL.revokeObjectURL(file.preview));
     }, [files]);
 
-    const segment = () => {
+    const segment = async () => {
         setSegment(true);
-        setSubmit(true)
-        history.replace('/segmentacion');
+        await setSubmit(true);
+        setTimeout(() => history.replace("/segmentacion"), 2000)
     };
 
-    const classify = () => {
+    const classify = async () => {
         setSegment(false)
-        setSubmit(true)
-        history.replace('/clasificacion');
-
+        await setSubmit(true);
+        setTimeout(() => history.replace("/clasificacion"), 2000)
     };
 
     return (

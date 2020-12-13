@@ -16,24 +16,26 @@ export default function AddressForm({email, submitForm, type}) {
 
     useEffect(() => {
         async function handleSubmit() {
-            const data = {
-                "firstName": firstName.current.value,
-                "lastName": lastName.current.value,
-                "date": date.current.value,
-                "number": number.current.value,
-                "district": district.current.value,
-                "type": type,
-                "email": email
-            };
-            console.log("address data", data)
-            const token = await getToken();
-            const response = await axios({
-                method: 'post',
-                url: 'http://localhost:5000/address',
-                data: data,
-                headers: {'Authorization': token}
-            })
-            console.log("response", response)
+            if(submitForm) {
+                const data = {
+                    "firstName": firstName.current.value,
+                    "lastName": lastName.current.value,
+                    "date": date.current.value,
+                    "number": number.current.value,
+                    "district": district.current.value,
+                    "type": type,
+                    "email": email
+                };
+                console.log("address data", data)
+                const token = await getToken();
+                const response = await axios({
+                    method: 'post',
+                    url: 'http://localhost:5000/address',
+                    data: data,
+                    headers: {'Authorization': token}
+                })
+                console.log("response", response)
+            }
         }
         handleSubmit();
     }, [submitForm])

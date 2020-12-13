@@ -11,22 +11,24 @@ export default function DatosMedicos({email, submitForm, type}) {
 
     useEffect(() => {
         async function handleSubmit() {
-            const data = {
-                "bloodType": bloodType.current.value,
-                "sex": sex.current.value,
-                "raza": raza.current.value,
-                "email": email,
-                "type": type
-            };
-            console.log("datosmedicos data", data)
-            const token = getToken()
-            const response = await axios({
-                method: 'post',
-                url: 'http://localhost:5000/datosmedicos',
-                data: data,
-                headers: {'Authorization': token}
-            })
-            console.log('response', response)
+            if(submitForm) {
+                const data = {
+                    "bloodType": bloodType.current.value,
+                    "sex": sex.current.value,
+                    "raza": raza.current.value,
+                    "email": email,
+                    "type": type
+                };
+                console.log("datosmedicos data", data)
+                const token = getToken()
+                const response = await axios({
+                    method: 'post',
+                    url: 'http://localhost:5000/datosmedicos',
+                    data: data,
+                    headers: {'Authorization': token}
+                })
+                console.log('response', response)
+            }
         }
         handleSubmit();
     }, [submitForm])
