@@ -7,7 +7,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
@@ -15,7 +14,7 @@ import AddressForm from "../components/AddressForm";
 import DatosMedicos from "../components/DatosMedicos";
 import Preview from "../components/Preview";
 import Copyright from "../components/Copyright";
-import {checkUser, getToken} from "../service/magic";
+import {getToken} from "../service/magic";
 import axios from 'axios';
 
 
@@ -104,13 +103,13 @@ const Checkout = () => {
     const segment = async () => {
         setSegment(true);
         await setSubmit(true);
-        setTimeout(() => history.replace("/segmentacion"), 2000)
+        setTimeout(() => history.replace("/segmentacion"), 5000)
     };
 
     const classify = async () => {
         setSegment(false)
         await setSubmit(true);
-        setTimeout(() => history.replace("/clasificacion"), 2000)
+        setTimeout(() => history.replace("/clasificacion"), 5000)
     };
 
     return (
