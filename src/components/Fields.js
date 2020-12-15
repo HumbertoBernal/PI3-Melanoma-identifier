@@ -11,7 +11,7 @@ const Fields = (props) => {
 
     return (
         <Flex direction={"column"}>
-            {fields.map(e => {return <Field fieldName={e["fieldName"]} value={e["value"]}/>})}
+            {fields.map(e => {return <Field key={e["fieldName"]} fieldName={e["fieldName"]} value={e["value"]}/>})}
         </Flex>
     );
 };

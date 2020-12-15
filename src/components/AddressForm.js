@@ -38,7 +38,7 @@ export default function AddressForm({email, submitForm, type}) {
             }
         }
         handleSubmit();
-    }, [submitForm])
+    }, [email, submitForm, type])
 
     return (
         <form>

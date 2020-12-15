@@ -1,10 +1,7 @@
 import React from 'react';
 
-import {Box, Button, Image, Text} from '@chakra-ui/core';
+import {Box, Image} from '@chakra-ui/core';
 import Flex from "@chakra-ui/core/dist/Flex";
-import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
-import nombre from "../pages/Clasification";
 
 import Heading from "@chakra-ui/core/dist/Heading";
 import Fields from "./Fields";

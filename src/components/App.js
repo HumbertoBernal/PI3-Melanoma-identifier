@@ -60,21 +60,21 @@ const App = () => {
   return (
       <ThemeProvider>
         <CSSReset/>
-    <UserContext.Provider value={user}>
-      <Router>
-      {user.hasData ? <Redirect to={'/segmentacion'}/> : user.isLoggedIn && <Redirect to='/checkout' />}
-        <Layout salio={salio} user={user}>
-        <Switch>
-          <Route exact path="/" component={Authenticate} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path="/checkout" component={Checkout} />
-          <PrivateRoute path="/segmentacion" component={Segmentation} />
-          <PrivateRoute path="/clasificacion" component={Clasification} />
-          <Route component={NotFound} />
-        </Switch>
-        </Layout>
-      </Router>
-    </UserContext.Provider>
+        <UserContext.Provider value={user}>
+          <Router>
+          {user.hasData ? <Redirect to={'/segmentacion'}/> : user.isLoggedIn && <Redirect to='/checkout' />}
+            <Layout salio={salio} user={user}>
+            <Switch>
+              <Route exact path="/" component={Authenticate} />
+              <PrivateRoute path="/dashboard" component={Dashboard} />
+              <PrivateRoute path="/checkout" component={Checkout} />
+              <PrivateRoute path="/segmentacion" component={Segmentation} />
+              <PrivateRoute path="/clasificacion" component={Clasification} />
+              <Route component={NotFound} />
+            </Switch>
+            </Layout>
+          </Router>
+        </UserContext.Provider>
         </ThemeProvider>
   );
 };

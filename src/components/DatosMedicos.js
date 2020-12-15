@@ -27,11 +27,14 @@ export default function DatosMedicos({email, submitForm, type}) {
                     data: data,
                     headers: {'Authorization': token}
                 })
+                .catch(err => {
+                    console.log('Hubo un error al enviar la data')
+                  });
                 console.log('response', response)
             }
-        }
+        };
         handleSubmit();
-    }, [submitForm])
+    }, [email, submitForm, type])
 
     return (
             <Grid container spacing={3}>
