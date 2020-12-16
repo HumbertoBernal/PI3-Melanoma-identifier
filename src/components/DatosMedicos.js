@@ -35,7 +35,7 @@ export default function DatosMedicos({email, submitForm, type, submitted}) {
             }
         };
         handleSubmit();
-    }, [email, submitForm, type])
+    }, [email, submitForm, submitted, type])
 
     return (
             <Grid container spacing={3}>

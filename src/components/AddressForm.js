@@ -39,7 +39,7 @@ export default function AddressForm({email, submitForm, type, submited}) {
             }
         }
         handleSubmit();
-    }, [email, submitForm, type])
+    }, [email, submitForm, submited, type])
 
     return (
         <form>

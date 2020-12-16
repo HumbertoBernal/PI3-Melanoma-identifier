@@ -91,7 +91,7 @@ const Checkout = () => {
             }
         }
         submitPhoto()
-    }, [doSubmit, email, files])
+    }, [doSubmit, email, files, segmentBool, submitted])
 
     useEffect(() => {
         const printToken = async () => {
