@@ -7,7 +7,7 @@ import axios from 'axios';
 import {getToken} from "../service/magic";
 
 // type: true === segment
-export default function AddressForm({email, submitForm, type}) {
+export default function AddressForm({email, submitForm, type, submited}) {
     const firstName = useRef(null);
     const lastName = useRef(null);
     const date = useRef(null);
@@ -35,6 +35,7 @@ export default function AddressForm({email, submitForm, type}) {
                     headers: {'Authorization': token}
                 })
                 console.log("response", response)
+                submited()
             }
         }
         handleSubmit();

@@ -62,15 +62,20 @@ const Checkout = () => {
     const [files, setFiles] = useState([]);
     const [segmentBool, setSegment] = useState(false);
     const [doSubmit, setSubmit] = useState(false);
+    const [submitState, setSubmitState] = useState(0);
     const classes = useStyles();
     const history = useHistory();
 
+    const submitted = () => {
+        setSubmitState(submitState + 1)
+    }
 
     useEffect(() => {
         async function submitPhoto() {
             if(doSubmit) {
                 let formData = new FormData();
                 formData.append('img_file', files[0]);
+                formData.append('type', segmentBool)
                 formData.append('email', email);
                 const token = await getToken()
                 const response = await axios({
@@ -82,6 +87,7 @@ const Checkout = () => {
                         'Authorization': token}
                 });
                 console.log("upload response", response)
+                submitted()
             }
         }
         submitPhoto()
@@ -95,21 +101,32 @@ const Checkout = () => {
         printToken();
     }, []);
 
-    useEffect(() => () => {
+    useEffect( () => {
         // Make sure to revoke the data uris to avoid memory leaks
         files.forEach(file => URL.revokeObjectURL(file.preview));
     }, [files]);
 
+    useEffect(() => {
+        if(submitState === 3) {
+            if(segmentBool) {
+                history.replace("/segmentacion")
+            }
+            else {
+                history.replace("/classificacion")
+            }
+        }
+    }, [submitState])
+
     const segment = async () => {
         setSegment(true);
         await setSubmit(true);
-        setTimeout(() => history.replace("/segmentacion"), 5000)
+        // setTimeout(() => history.replace("/segmentacion"), 5000)
     };
 
     const classify = async () => {
         setSegment(false)
         await setSubmit(true);
-        setTimeout(() => history.replace("/clasificacion"), 5000)
+        // setTimeout(() => history.replace("/clasificacion"), 5000)
     };
 
     return (
@@ -122,7 +139,7 @@ const Checkout = () => {
                             <Typography component="h6" variant="h6" align="center">
                                 Información personal
                             </Typography>
-                            <AddressForm email={email} submitForm={doSubmit} type={segmentBool}/>
+                            <AddressForm email={email} submitForm={doSubmit} type={segmentBool} submited={submitted}/>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={5}>
@@ -130,7 +147,7 @@ const Checkout = () => {
                             <Typography component="h6" variant="h6" align="center">
                                 Datos médicos
                             </Typography>
-                            <DatosMedicos email={email} submitForm={doSubmit} type={segmentBool}/>
+                            <DatosMedicos email={email} submitForm={doSubmit} type={segmentBool} submitted={submitted}/>
                         </Paper>
                         <Paper className={classes.paper} >
                             <Preview  files={files} setFiles={setFiles}/>

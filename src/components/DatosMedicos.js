@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import {getToken} from "../service/magic";
 import axios from 'axios'
 
-export default function DatosMedicos({email, submitForm, type}) {
+export default function DatosMedicos({email, submitForm, type, submitted}) {
     const bloodType = useRef(null);
     const sex = useRef(null);
     const raza = useRef(null);
@@ -31,6 +31,7 @@ export default function DatosMedicos({email, submitForm, type}) {
                     console.log('Hubo un error al enviar la data')
                   });
                 console.log('response', response)
+                submitted()
             }
         };
         handleSubmit();
