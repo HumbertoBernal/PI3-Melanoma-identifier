@@ -11,6 +11,8 @@ import {getToken} from "../service/magic";
 import ImageBox from '../components/ImageBox';
 import {useHistory} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import ReactToPdf from "react-to-pdf";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Main = styled.main`
     margin-top: 100px;
@@ -20,6 +22,9 @@ const Clasification = () => {
     const {email} = useContext(UserContext)
     const [data, setData] = useState({firstName: " ", lastName:" "})
     const history = useHistory();
+    const [loading, setLoading] = useState(true);
+
+    const ref = React.createRef();
 
     useEffect(() => {
         const getData = async () => {
@@ -31,21 +36,40 @@ const Clasification = () => {
                 headers: {'Authorization': token}
             })
             setData(response.data)
+            setLoading(false);
         }
         getData()
     }, [email])
 
+    if (loading) {
+        return (
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ height: '100vh' }}
+          >
+            <Spinner animation="border" />
+          </div>
+        );
+      }
+
     return (
-        <>
+        <div ref={ ref }>
             <AppBar position="relative" color="default">
-                <Toolbar>
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Clasificación
-                    </Typography>
-                    <Button size="small" variant="contained" onClick={ () => history.replace("/segmentacion")}>
+                <Toolbar className="d-flex justify-content-between">
+                        <div className="mx-2 ">
+                            <Typography variant="h6" color="inherit" noWrap>
+                            Clasificación
+                            </Typography>
+                        </div>
+                        <div className="mx-2 ">
+                            <Button className="mx-2" size="small" variant="contained" onClick={ () => history.replace("/segmentacion")}>
                             Segmentación
-                     </Button>
-                </Toolbar>
+                            </Button>
+                            <ReactToPdf targetRef={ref} scale={0.6} filename="code-example.pdf">
+                                {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                            </ReactToPdf>
+                        </div>
+                    </Toolbar>
             </AppBar>
             <Main>
                 <Flex align={"center"} direction={"column"}>
@@ -75,7 +99,7 @@ const Clasification = () => {
                     </Flex>
                 </Flex>
             </Main>
-        </>
+        </div>
     );
 };
 
